@@ -1,5 +1,5 @@
 def getStringFromKeyboard(message):
-  return input(message)
+  return input(message+": ")
 
 def printScore(state):
   print("Player 1 score: "+state.score1)
@@ -24,9 +24,12 @@ def validateSecret(code):
   except:
     return False         # conversion error
 
-def validateGuess(secret, code):
+def validateGuess(state, code):
   isNumber = validateSecret(code)
-  if not isNumber:
-    return code
+  if isNumber:
+    if len(state.secret) == len(code):
+      return code
+    else:
+      return False
   else:
     return False
