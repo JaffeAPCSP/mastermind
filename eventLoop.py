@@ -34,7 +34,7 @@ while state.gameState != c.QUIT:
   # COMPUTE_FEEDBACK -> analyze guess / offer feedback
   elif state.gameState == c.COMPUTE_FEEDBACK:
       if (isGuessCorrect(state)):
-        state = state.addScore(state)
+        state = state.addScoreToCurrentPlayer(state)
         state = state.switchPlayer(state)
         state = state.setGameState(state, c.GET_SECRET)
         ui.printWinMessage(state)

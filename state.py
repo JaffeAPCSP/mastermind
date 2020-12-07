@@ -45,13 +45,15 @@ def computeAndSetFeedback(state):
   usedList = [False for i in range(len(secretList))]
   feedbackList = ['' for i in range(len(secretList))]
 
+  # Check for identical digits
   for index in range(len(secretList)):
     if secretList[index] == guessList[index]:
       feedbackList[index] = guessList[index]
       usedList[index] = True
 
+  # Check for digits in the wrong place
   for guessIndex in range(len(guessList)):
-    if not guessList[guessIndex]:
+    if not usedList[guessIndex]:
       for secretIndex in range(len(secretList)):
         if guessList[guessIndex] == secretList[secretIndex] and not usedList[secretIndex]:
           feedbackList[guessIndex] = c.PRESENT
@@ -59,6 +61,7 @@ def computeAndSetFeedback(state):
           # break out of inner loop, goto next guess letter
           break
 
+  # Set all not-found digits to the bullet symbol
   for feedbackIndex in range(len(feedbackList)):
     if not usedList[feedbackIndex]:
       feedbackList[feedbackIndex] = c.NOT_PRESENT
